@@ -16,7 +16,7 @@ module.exports = function(app, db) {
     app.delete('/notes/:id', (req, res) => {
         const id = req.params.id;
         const details = {'_id': new ObjectID(id)};
-        db.collection('notes').remove(details, (err, item) => {
+        db.collection('notes').deleteOne(details, (err, item) => {
             if (err) {
                 res.send({ 'error': 'Error occured' });
             } else {
@@ -40,7 +40,7 @@ module.exports = function(app, db) {
 
     app.post('/notes', (req, res) => {
         const note = { text: req.body.body, title: req.body.title };
-        db.collection('notes').insert(note, (err, result) => {
+        db.collection('notes').insertOne(note, (err, result) => {
             if (err) {
                 res.send({ 'error': 'Error occured' });
             } else {
